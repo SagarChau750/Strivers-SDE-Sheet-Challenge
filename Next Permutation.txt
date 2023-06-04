@@ -1,0 +1,37 @@
+#include <bits/stdc++.h> 
+
+void reverse(vector<int>&permutation , int i, int j){
+    while( i < j){
+        swap(permutation[i++] , permutation[j--]);
+    }
+}
+vector<int> nextPermutation(vector<int> &permutation, int n)
+{
+    /* METHOD-1 {use in-built function}
+    next_permutation(permutation.begin(),permutation.end());
+    vector<int>ans;
+    for(auto i : permutation){
+        ans.push_back(i);
+    }
+    return ans;
+    */
+
+    //METHOD 2 {Writing the whole logic}
+   
+
+    int i = permutation.size() -2;
+    while(i >= 0 && permutation[i] >= permutation[i+1]){  //finding the pivot element from last
+        i--;
+    }
+
+    if( i >= 0){                            //finding the element from last which is greater than pivot element
+        int j = permutation.size()-1;
+        while(permutation[j] <= permutation[i])
+            j--;
+        swap(permutation[i] , permutation[j]);  // swaping the above two element after finding 
+    }
+
+    reverse(permutation, i+1, permutation.size()-1);  //reversing the array after the pivot index
+
+    return permutation;
+}
