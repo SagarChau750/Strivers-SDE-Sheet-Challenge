@@ -1,0 +1,28 @@
+#include <bits/stdc++.h> 
+long long max(long long x , long long y){
+   return (x>y)?x:y;
+}
+
+long long maxSubarraySum(int arr[], int n)
+{
+   /* long long ans = arr[0];
+    long long maxi = arr[0];
+    for(int i = 1; i < n; i++){
+        ans = max(arr[i] , ans + arr[i]);
+        maxi = max(maxi , ans);
+    }
+    
+    return ( maxi > 0)?maxi:0;  */
+     long long sum = 0;
+      long long maxi = arr[0];
+      for(int i = 0; i < n; i++){
+          sum += arr[i];
+
+          if(sum < 0)
+            sum = 0;
+          maxi = max(sum , maxi);
+      }
+
+      return maxi;
+
+}
