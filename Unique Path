@@ -1,0 +1,25 @@
+#include <bits/stdc++.h> 
+int uniquePaths(int m, int n) {
+	// Write your code here.
+	 std::vector<std::vector<int>> dp(m, std::vector<int>(n, 0));
+
+    // Initialize the first row and first column with 1, as there is only one path to reach each cell in the first row and column
+    for (int i = 0; i < m; i++) {
+        dp[i][0] = 1;
+    }
+
+    for (int j = 0; j < n; j++) {
+        dp[0][j] = 1;
+    }
+
+    // Fill the rest of the grid using dynamic programming
+    for (int i = 1; i < m; i++) {
+        for (int j = 1; j < n; j++) {
+            // The number of unique paths to reach the current cell is the sum of the number of paths from the cell above and the cell to the left
+            dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+        }
+    }
+
+    // Return the number of unique paths to reach the bottom-right corner
+    return dp[m - 1][n - 1];
+}
