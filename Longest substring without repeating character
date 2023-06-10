@@ -1,0 +1,23 @@
+#include <bits/stdc++.h> 
+int uniqueSubstrings(string input)
+{
+    int n = input.length();
+    int maxLength = 0;
+    int start = 0;
+    unordered_map<char, int> charMap;
+
+    for (int i = 0; i < n; i++) {
+        char currentChar = input[i];
+
+        if (charMap.find(currentChar) != charMap.end()) {
+            start = max(start, charMap[currentChar] + 1);
+        }
+
+        charMap[currentChar] = i;
+
+        maxLength = max(maxLength, i - start + 1);
+    }
+
+    return maxLength;
+   
+}
