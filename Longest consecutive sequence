@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+
+int lengthOfLongestConsecutiveSequence(vector<int> &arr, int n) {
+    unordered_set<int> numSet;
+    
+    // Insert all elements into the set
+    for (int num : arr) {
+        numSet.insert(num);
+    }
+    
+    int count = 0;
+    
+    // Iterate over the elements in the set
+    for (int num : numSet) {
+        // Check if the current element is the start of a sequence
+        if (numSet.find(num - 1) == numSet.end()) {
+            int currentNum = num;
+            int currentStreak = 1;
+            
+            // Calculate the length of the consecutive sequence
+            while (numSet.find(currentNum + 1) != numSet.end()) {
+                currentNum++;
+                currentStreak++;
+            }
+            
+            // Update the longest streak if necessary
+            count = max(count, currentStreak);
+        }
+    }
+    
+    return count;
+}
