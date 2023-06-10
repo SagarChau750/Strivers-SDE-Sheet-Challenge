@@ -1,0 +1,24 @@
+#include <bits/stdc++.h>
+
+int subarraysXor(vector<int> &arr, int x)
+{
+    unordered_map<int, int> xorMap;
+    int count = 0;
+    int currXOR = 0;
+
+    xorMap[0] = 1;
+
+    for (int num : arr) {
+        currXOR ^= num;
+
+        int requiredXOR = currXOR ^ x;
+
+        if (xorMap.find(requiredXOR) != xorMap.end()) {
+            count += xorMap[requiredXOR];
+        }
+
+        xorMap[currXOR]++;
+    }
+
+    return count;
+}
