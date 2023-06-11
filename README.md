@@ -11,7 +11,7 @@ How to Use :
 To benefit from this repository and the Striver SDE Sheet, follow these steps:
 
 1. Clone the repository to your local machine using the command:
-    git clone https://github.com/SagarChau750/Striver-SDE-Sheet-Challenge.git
+    git clone https://github.com/SagarChau750/Strivers-SDE-Sheet-Challenge/tree/main
 2. Navigate to the specific problem folder you want to review or revise.
 
 3. Open the solution file corresponding to the problem in your preferred programming language.
