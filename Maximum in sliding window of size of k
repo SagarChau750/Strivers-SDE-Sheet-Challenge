@@ -1,0 +1,20 @@
+#include <bits/stdc++.h>
+
+vector<int> slidingWindowMaximum(vector<int>& nums, int k) {
+    int n = nums.size();
+    vector<int> ans;
+    int start = 0;
+    
+    while (start <= n - k) {
+        int temp = nums[start];
+        for (int i = start; i < start + k; i++) {
+            if (nums[i] >= temp) {
+                temp = nums[i];
+            }
+        }
+        ans.push_back(temp);
+        start++;
+    }
+    
+    return ans;
+}
