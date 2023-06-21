@@ -1,0 +1,46 @@
+/****************************************************************
+
+    Following is the class structure of the Node class:
+
+        class Node
+        {
+        public:
+            int data;
+            Node *next;
+            Node()
+            {
+                this->data = 0;
+                next = NULL;
+            }
+            Node(int data)
+            {
+                this->data = data;
+                this->next = NULL;
+            }
+            Node(int data, Node* next)
+            {
+                this->data = data;
+                this->next = next;
+            }
+        };
+
+
+*****************************************************************/
+#include<unordered_set>
+bool detectCycle(Node *head)
+{
+	//	Write your code here
+    unordered_set<Node*> visited;
+
+    while (head != nullptr) {
+        // If the current node is already in the set, a cycle exists.
+        if (visited.find(head) != visited.end())
+            return true;
+
+        // Add the current node to the set and move to the next node.
+        visited.insert(head);
+        head = head->next;
+    }
+
+    return false;
+}
