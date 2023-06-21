@@ -1,0 +1,52 @@
+#include <bits/stdc++.h> 
+/****************************************************************
+
+    Following is the class structure of the LinkedListNode class:
+
+    template <typename T>
+    class LinkedListNode
+    {
+    public:
+        T data;
+        LinkedListNode<T> *next;
+        LinkedListNode(T data)
+        {
+            this->data = data;
+            this->next = NULL;
+        }
+    };
+
+*****************************************************************/
+
+bool isPalindrome(LinkedListNode<int> *head) {
+    // Write your code here.
+     if (head == nullptr || head->next == nullptr)
+        return true;
+
+    LinkedListNode<int>* slow = head;
+    LinkedListNode<int>* fast = head;
+    stack<int> elements;
+
+    while (fast != nullptr && fast->next != nullptr) {
+        elements.push(slow->data);
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    // Handle odd length by moving slow one step forward
+    if (fast != nullptr)
+        slow = slow->next;
+
+    while (slow != nullptr) {
+        int top = elements.top();
+        elements.pop();
+
+        if (slow->data != top)
+            return false;
+
+        slow = slow->next;
+    }
+
+    return elements.empty();
+
+}
