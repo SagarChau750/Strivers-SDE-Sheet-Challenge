@@ -1,0 +1,16 @@
+#include <bits/stdc++.h> 
+void solve(string &s , vector<string>&ans, int l , int r){
+    if(l == r){
+        ans.push_back(s);
+    }
+    for (int i = l; i <= r; ++i) {
+        swap(s[l], s[i]);
+        solve(s,ans, l + 1, r);
+        swap(s[l], s[i]); // Backtrack
+    }
+}
+vector<string> findPermutations(string &s) {
+    vector<string>ans;
+    solve(s , ans , 0 , s.size()-1);
+    return ans;
+}
