@@ -1,0 +1,32 @@
+#include <bits/stdc++.h> 
+vector<int> mergeKSortedArrays(vector<vector<int>>&kArrays, int k)
+{
+   priority_queue<pair<int, std::pair<int, int>>, vector<std::pair<int,pair<int, int>>>, 
+   greater<pair<int, pair<int, int>>>> minHeap;
+
+    for (int i = 0; i < k; ++i) {
+        if (!kArrays[i].empty()) {
+            minHeap.push({kArrays[i][0], {i, 0}});
+        }
+    }
+
+    std::vector<int> result;
+
+    while (!minHeap.empty()) {
+        auto curr = minHeap.top();
+        minHeap.pop();
+
+        int element = curr.first;
+        int arrayIndex = curr.second.first;
+        int elementIndex = curr.second.second;
+
+        result.push_back(element);
+
+        int nextIndex = elementIndex + 1;
+        if (nextIndex < kArrays[arrayIndex].size()) {
+            minHeap.push({kArrays[arrayIndex][nextIndex], {arrayIndex, nextIndex}});
+        }
+    }
+
+    return result;
+}
