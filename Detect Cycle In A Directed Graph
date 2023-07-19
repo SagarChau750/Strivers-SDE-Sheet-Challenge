@@ -1,0 +1,41 @@
+bool cycled(int source, vector<int> &vis, vector<int> &path, vector<int> adj[]){
+
+    vis[source] = 1;
+    path[source] = 1;
+    for(auto it: adj[source]){
+      if(vis[it] && path[it]){
+        return true;
+      }
+      else{
+        if(!vis[it])
+          {
+            if(cycled(it,vis,path,adj) == true){
+              return true;
+          }
+        }
+      }
+    }
+ 
+    path[source] = 0;
+    return false;
+}
+int detectCycleInDirectedGraph(int n, vector < pair < int, int >> & edges) {
+  // Write your code here.
+  vector<int> adj[n+1];
+  for(auto it: edges){
+    adj[it.first].push_back(it.second);
+  }
+ 
+  vector<int> vis(n+1, 0);
+  vector<int> path(n+1,0);
+
+  for(int i = 1; i < n+1; i++){
+    if(vis[i] == 0){
+      if(cycled(i,vis,path,adj) == true){
+        return 1;
+      }
+    }
+  }
+ 
+  return false;
+}
