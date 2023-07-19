@@ -1,0 +1,32 @@
+bool dfs(vector<int>& vis,vector<vector<int>>& adj,int parent,int i){
+    vis[i]=1;
+    for(auto child:adj[i]){
+        if(!vis[child]){
+            if(dfs(vis,adj,i,child)) return true;
+        }
+        else{
+           if(child!=parent) return true;
+        }
+    }
+    return false;
+}
+
+string cycleDetection (vector<vector<int>>& edges, int n, int m)
+{
+    // Write your code here.
+    vector<vector<int>> adj(n+1);
+    for(int i=0;i<m;i++){
+        adj[edges[i][0]].push_back(edges[i][1]);
+        adj[edges[i][1]].push_back(edges[i][0]);
+    }
+    string ans="Yes";
+    vector<int> vis(n+1,0);
+    for(int i=1;i<=n;i++){
+        if(!vis[i]){
+            if(dfs(vis,adj,-1,i)) return ans;
+        }
+    }
+    ans="No";
+    return ans;
+}
+
